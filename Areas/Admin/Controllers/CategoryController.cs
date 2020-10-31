@@ -77,7 +77,7 @@ namespace Spice.Areas.Admin
         }
 
 
-        // GET - DELETE - alomst same as GET EDIT
+        // GET - DELETE - almost same as GET EDIT
 
         public async Task<IActionResult> Delete(int? id)
         {
@@ -85,6 +85,7 @@ namespace Spice.Areas.Admin
             {
                 return NotFound();
             }
+
             var category = await _db.Category.FindAsync(id);
             if (category == null)
             {
@@ -92,6 +93,8 @@ namespace Spice.Areas.Admin
             }
             return View(category);
         }
+
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -107,5 +110,23 @@ namespace Spice.Areas.Admin
             return RedirectToAction(nameof(Index));
 
         }
+
+
+        //GET - Details
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var category = await _db.Category.FindAsync(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return View(category);
+        }
+        
     }
 }
